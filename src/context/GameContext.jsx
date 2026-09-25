@@ -2,10 +2,10 @@ import { useEffect, useMemo, useState } from "react"
 import { GameContext } from "./gameState"
 
 const initialProfile = {
-  name: "Alex",
-  totalXp: 1240,
-  todayXp: 30,
-  streak: 7,
+  name: "",
+  totalXp: 0,
+  todayXp: 0,
+  streak: 0,
   studyMinutes: 0,
   quizzesCompleted: 0,
   questionsAnswered: 0,

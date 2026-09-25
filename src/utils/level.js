@@ -1,5 +1,5 @@
 const XP_PER_LEVEL = 500
-const STARTING_LEVEL = 2
+const STARTING_LEVEL = 1
 
 export function getLevelProgress(totalXp) {
   const currentXp = totalXp % XP_PER_LEVEL
