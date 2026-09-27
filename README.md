@@ -55,6 +55,18 @@ Projektet är uppdelat i bland annat:
 
 Användarens profil, XP och progression sparas i localStorage.
 
+## Uppfyllda krav
+
+Projektet innehåller bland annat:
+
+- Komponentbaserad struktur med separata komponenter och sidor
+- Routing med React Router
+- Delat state genom Context API
+- Externt API-anrop med loading- och felhantering
+- Formulär med validering
+- Persistens med localStorage
+- Responsiv design
+
 ## Fortsatt utveckling
 
 Jag vill fortsätta utveckla Plugghjälpen efter examinationen. Några saker jag vill lägga till framöver är riktiga användarkonton, databas, fler ämnen och årskurser samt vidareutveckling av AI-hjälpen.
