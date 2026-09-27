@@ -1,21 +1,24 @@
 # Plugghjälpen
 
+Plugghjälpen är en React-baserad lärplattform där elever kan träna skolämnen genom korta aktiviteter, nivåer och spelifierad progression. Tanken är att göra det lättare att ta ett steg i taget: först få en förklaring, sedan träna och få tydlig feedback.
+
 ## Om projektet
 
-Plugghjälpen är en React-baserad lärplattform där elever tränar ämnen genom nivåer, korta pedagogiska aktiviteter och spelifierad progression. Appen är byggd som ett projektarbete i JavaScript 3 / React.
+Plugghjälpen är ett eget projekt som jag påbörjade innan examinationen i JavaScript 3. Plugghjälpen är ett eget projekt som jag påbörjade innan examinationen i JavaScript 3. Under examinationen har jag valt att vidareutveckla projektet och använda det för att arbeta med kursens moment, bland annat komponentstruktur, routing, state-hantering, persistens, formulär och externa API-anrop.
+
+Appen har alltså inte byggts helt från grunden under examinationsperioden. Den används som grund för att visa och utveckla de delar som bedöms inom kursen.
 
 ## Funktioner
 
-- Ämnen, områden och nivåer med dynamisk routing.
-- Algebra nivå 1–3 med quiz, para ihop, lös steg för steg, lös själv, hitta felet och bonusutmaningar.
-- JavaScript nivå 1–3 med kodspecifika aktiviteter: förutsäg output, bygg kod, hitta buggen, fyll i kod och skriv kod.
-- XP, levels, streak, achievements, avatar och upplåsning av nivåer.
-- Profil med redigerbart visningsnamn och avatar-anpassning.
-- `🧠 Jag fattar inte` och räddningsläge i utvalda aktiviteter.
-- `🔍 Varför?` och datadrivna lärsummeringar efter aktiviteter.
-- Dagens techfråga från ett externt API, med loading-, fel- och tomt tillstånd.
-- Responsiv design för desktop och mobil.
-- Persistens av profil och progression med `localStorage`.
+- Ämnen, områden och nivåer med dynamisk navigation.
+- Datastyrda läraktiviteter för bland annat algebra och JavaScript.
+- Quiz, para ihop, lös steg för steg, lös själv, hitta felet och kodövningar.
+- XP, level-system, nivåupplåsning, achievements och avatar.
+- Profil där användaren kan välja visningsnamn och anpassa sin avatar.
+- Pedagogisk hjälp i utvalda aktiviteter, bland annat `Jag fattar inte`, räddningsläge och `Varför?`.
+- Kort summering efter aktiviteter med vad eleven har tränat på.
+- Dagens teknikfråga från ett externt API.
+- Sparad profil och progression i webbläsarens `localStorage`.
 
 ## Teknik
 
@@ -23,24 +26,24 @@ Plugghjälpen är en React-baserad lärplattform där elever tränar ämnen geno
 - Vite
 - JavaScript
 - React Router
-- Context API (`GameContext`)
+- Context API genom `GameContext`
 - `localStorage`
-- [Open Trivia Database](https://opentdb.com/api_config.php) för dagens techfråga
+- Fetch API och [Open Trivia Database](https://opentdb.com/api_config.php) för dagens teknikfråga
 
-## Installation och start
+## Så startar man projektet
+
+Installera beroenden och starta utvecklingsservern:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Öppna sedan adressen som Vite visar i terminalen.
+Öppna sedan den adress som Vite visar i terminalen.
 
 ### Valfri AI-hjälp
 
-AI-ledtrådar är en valfri framtidsfunktion och behövs inte för att demonstrera projektets huvudfunktioner eller externa API-krav.
-
-Skapa vid behov en `.env`-fil från `.env.example` och lägg in en giltig `OPENAI_API_KEY`. Starta sedan servern i en separat terminal:
+Projektets vanliga funktioner och examinationsdelar kräver inte AI-servern. Det finns en separat, valfri server för AI-ledtrådar som kan användas om en giltig `OPENAI_API_KEY` har lagts i en lokal `.env`-fil. Den startas då med:
 
 ```bash
 npm run server
@@ -48,25 +51,28 @@ npm run server
 
 ## Examinationskrav
 
-| Krav | Lösning i Plugghjälpen |
+| Krav | Hur det visas i projektet |
 | --- | --- |
-| Komponentstruktur | Återanvändbara komponenter i `src/components`, vyer i `src/pages`, central data i `src/data` och delad state i `src/context`. |
-| Routing | React Router i `src/App.jsx` med statiska och dynamiska routes för ämne, område, nivå och aktivitet. |
-| State management | `GameContext` delar profil, XP, progression och avatar. Lokalt state hanterar exempelvis svar, timers, formulär och UI-feedback. |
-| Externt API | `DailyQuestion` hämtar en gratis techfråga från Open Trivia Database via `fetch`. |
-| Loading/fel | API-komponenten visar loading, begripligt nätverksfel och tomt tillstånd utan att störa övriga appen. |
-| Formulär/validering | `ProfileEditForm` använder ett kontrollerat React-formulär, trimning, required-fält och fel-/sparfeedback. |
-| Persistens | `GameContext` sparar profilen, inklusive namn, XP och progression, i `localStorage`. |
-| Kodkvalitet | `npm run lint` används för statisk kontroll och `npm run build` för produktionsbygge. |
+| Komponentstruktur | Återanvändbara komponenter finns i `src/components`, sidor i `src/pages`, innehåll i `src/data` och delat tillstånd i `src/context`. Exempel är `progressBar.jsx`, `avatar.jsx` och `resultPopup.jsx`. |
+| Routing | `src/App.jsx` använder React Router med både vanliga och dynamiska routes för ämne, område, nivå och aktivitet. |
+| State management | `src/context/GameContext.jsx` hanterar profil, XP, statistik, avatar och nivåprogression. Lokalt state används också för exempelvis quizsvar, timers, formulär och feedback. |
+| Externt API med loading/felhantering | `src/components/dailyQuestion.jsx` hämtar en teknikfråga från Open Trivia Database med `fetch`. Komponenten har loading-, fel- och tomt tillstånd. |
+| Formulär och validering | `src/components/profileEditForm.jsx` är ett kontrollerat React-formulär. Namnet trimmas och tomt namn ger tydlig valideringsfeedback. |
+| Persistens | `GameContext` läser och sparar profil, avatar, XP och progression i `localStorage` under nyckeln `plugghjalpen-profile`. |
+| Kodkvalitet | Projektet är uppdelat efter ansvar mellan komponenter, sidor, data och context. `npm run lint` används för kodkontroll och `npm run build` för att testa produktionsbygget. |
 
-## VG-funktioner
+## VG-kriterier som projektet kan styrka
 
-Projektet kan försvaras mot minst följande VG-kriterier:
+- **Genomtänkt komponentarkitektur:** återanvändbara komponenter, datastyrt utbildningsinnehåll och ett gemensamt `GameContext` gör att nya aktiviteter och nivåer kan läggas till utan att hela gränssnittet skrivs om.
+- **Responsiv design:** gränssnittet är anpassat för både desktop och mobil, bland annat för dashboard, profil, nivåer och aktiviteter.
+- **Utökad relevant funktionalitet:** projektet innehåller mer än ett grundläggande quiz, till exempel nivåprogression, avatar, achievements, pedagogiska hjälplägen och flera typer av övningar.
+- **Utökad felhantering:** den externa API-komponenten hanterar laddning, nätverksfel och tomt svar utan att resten av appen slutar fungera.
 
-1. Utökad felhantering: extern API-funktion har loading, nätverksfel och empty state.
-2. Genomtänkt komponentarkitektur: återanvändbara aktivitetstyper, data-driven rendering och `GameContext`.
-3. Responsiv design: CSS har brytpunkter för dashboard, profil, nivåer och aktiviteter.
-4. Utökad funktionalitet: progression, XP, avatar, achievements, räddningsläge och flera ämnesspecifika aktivitetstyper.
+Git-repot initierades sent i arbetet. Projektet gör därför inte anspråk på att uppfylla ett eventuellt VG-kriterium om en väl underhållen Git-historik genom hela utvecklingsprocessen.
+
+## Fortsatt utveckling
+
+Plugghjälpen är ett pågående projekt som jag planerar att fortsätta utveckla efter examinationen. Exempel på möjliga nästa steg är riktiga användarkonton och databas, mer innehåll för fler ämnen och årskurser samt vidareutveckling av AI-hjälpen. Dessa delar är framtida utveckling och inte färdiga funktioner i den här versionen.
 
 ## Kontrollkommandon
 
